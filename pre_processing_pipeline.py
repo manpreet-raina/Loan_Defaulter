@@ -64,8 +64,10 @@ class PreProcess:
             df.dropna(inplace=True)
 
             # Encoding term
-            term_values = {' 36 months': 36, ' 60 months': 60}
-            df['term'] = df.term.map(term_values)
+            #term_values = {' 36 months': 36, ' 60 months': 60}
+            #df['term'] = df.term.map(term_values)
+            df["term"] = df["term"].str.replace("\smonths", "")
+            df['term'] = df['term'].astype(int)
 
             df['zip_code'] = df.address.apply(lambda x: x[-5:])
             df.drop("address", axis=1, inplace=True)
