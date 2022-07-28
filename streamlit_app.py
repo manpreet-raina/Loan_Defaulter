@@ -93,46 +93,6 @@ def loan_status_distribution():
     )
 
 
-def loan_status_distribution_against_numerical_features():
-    db = database()
-
-    cursor = db.loan_data.find({}, {"loan_status": 1,"pub_rec":1, "initial_list_status":1,
-                                    "application_type":1, "mort_acc":1,"pub_rec_bankruptcies":1, "_id": 0})
-    df1 = pd.DataFrame(list(cursor))
-
-    options = {
-        "tooltip": {"trigger": "axis", "axisPointer": {"type": "shadow"}},
-        "legend": {
-            "data": ["Direct", "Mail Ad", "Affiliate Ad", "Video Ad", "Search Engine"]
-        },
-        "grid": {"left": "3%", "right": "4%", "bottom": "3%", "containLabel": True},
-        "xAxis": {"type": "value"},
-        "yAxis": {
-            "type": "category",
-            "data": ["pub_rec", "initial_list_status", "application_type", "mort_acc", "pub_rec_bankruptcies"],
-        },
-        "series": [
-            {
-                "name": "Fully Paid",
-                "type": "bar",
-                "stack": "total",
-                "label": {"show": True},
-                "emphasis": {"focus": "series"},
-                "data": [27128, 125000, 33456, 175000, 28000],
-            },
-            {
-                "name": "Charged Off",
-                "type": "bar",
-                "stack": "total",
-                "label": {"show": True},
-                "emphasis": {"focus": "series"},
-                "data": [6000, 27128, 7860, 27800, 7800],
-            },
-        ],
-    }
-    st_echarts(options=options, height="500px")
-
-
 page_names_to_funcs = {
     "Bulk Insert": bulk_insert,
     "Loan Status Distribution": loan_status_distribution,
