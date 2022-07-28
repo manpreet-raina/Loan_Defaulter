@@ -126,21 +126,6 @@ def xgb_model(X_train, y_train, X_test, y_test):
     print_score(y_train, y_train_pred, train=True)
     print_score(y_test, y_test_pred, train=False)
 
-"""
-def rf_model(X_train, y_train, X_test, y_test):
-    X_train.fillna(X_train.mean(), inplace=True)
-    rf = RandomForestClassifier(n_estimators=100)
-    rf.fit(X_train, y_train)
-
-    model_to_db(rf, "rf")
-
-    rf_test = load_model_from_db("rf")
-    y_train_pred = rf_test.predict(X_train)
-    y_test_pred = rf_test.predict(X_test)
-
-    print_score(y_train, y_train_pred, train=True)
-    print_score(y_test, y_test_pred, train=False)"""
-
 
 """if __name__ == '__main__':
     obj = PreProcess()
